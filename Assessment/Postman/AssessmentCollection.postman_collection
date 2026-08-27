@@ -1,0 +1,62 @@
+{
+  "info": {
+    "_postman_id": "54684fac-1e93-47fa-839d-f2817f5786d9",
+    "name": "My Collection",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57750720"
+  },
+  "item": [
+    {
+      "name": "Post data",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "const requestBody = JSON.parse(pm.request.body.raw);\nlet responseBody;\n\npm.test(\"Successful POST request\", function () {\n    pm.expect(pm.response.code).to.equal(201);\n});\n\npm.test(\"Response body has id\", function () {\n    responseBody = pm.response.json();\n    pm.expect(responseBody).to.have.property(\"id\");\n});\n\npm.test(\"Response title matches request payload\", function () {\n    responseBody = pm.response.json();\n    pm.expect(responseBody.title).to.equal(requestBody.title);\n});\n\npm.test(\"Response body matches request payload\", function () {\n    responseBody = pm.response.json();\n    pm.expect(responseBody.body).to.equal(requestBody.body);\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "",
+            "value": "",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Test Post\",\n  \"body\": \"This is a test post.\",\n  \"userId\": 1\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://jsonplaceholder.typicode.com/posts",
+          "protocol": "https",
+          "host": [
+            "jsonplaceholder",
+            "typicode",
+            "com"
+          ],
+          "path": [
+            "posts"
+          ]
+        },
+        "description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+      },
+      "response": []
+    }
+  ]
+}
