@@ -1,0 +1,3 @@
+git rm -r --cached bin obj .vs   
+git add .
+git commit -m "Add .gitignore, remove build artifacts"
